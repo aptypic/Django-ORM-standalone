@@ -20,7 +20,11 @@ def main():
     # print(Visit.objects.filter(leaved_at__isnull=True))
     for i in Visit.objects.filter(leaved_at__isnull=True):
         print('зашёл в хранилище: ', i.entered_at)
-        print('Находится в хранилище: ', '\n', (localtime() - i.entered_at.astimezone()).strftime())
+        print('Находится в хранилище: ', (localtime() - i.entered_at.astimezone()))
+        b = (localtime() - i.entered_at.astimezone()).total_seconds()
+        hours = b // 3600
+        minutes = (b % 3600) // 60
+        print('{}:{}:{}'.format(round(hours), round(minutes), (localtime() - i.entered_at.astimezone()).seconds))
 
 
 def timedelta_to_hms(duration):
